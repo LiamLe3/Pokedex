@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="st.css" />
+        <script src="./poke.js" defer></script>
+    </head>
+    <body>
+        <main class="main">
+            <header class="header">
+                <a href="./index.html" class="logo-wrapper">
+                    <img src="./assets/pokeball.svg" class="pokeball-logo" alt="pokeball" />
+                    <h1>Pokédex</h1>
+                </a>
+                
+                <div class="search-wrapper">
+                    <p class="search-font">Name or Number</p>
+
+                    <div class="search-container">
+                        <input
+                            type="text"
+                            class="search-input"
+                            placeholder="Search"
+                            id="search-input"
+                        />
+                    </div>
+                </div> 
+            </header>
+            <section class="pokemon-list">
+                <div class="list-section">
+                    <div class="list-wrapper"></div>
+                    <div class="not-found-message" id="not-found-message">Pokemon not found</div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

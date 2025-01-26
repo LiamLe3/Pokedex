@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokemon Detail</title>
+        <link rel="stylesheet" href="st.css" />
+        <script src="./pokemon-detail.js" defer></script>
+    </head>
+    <body>
+        <main class="main">
+            <header class="header">
+                <a href="./index.html" class="logo-wrapper">
+                    <img src="./assets/pokeball.svg" class="pokeball-logo" alt="pokeball" />
+                    <h1>Pokédex</h1>
+                </a>
+
+                <div class="navigation-wrapper">
+                    <a href="#" class="previous-wrapper" id="leftArrow">
+                        <img src="./assets/leftarrow.png" class="arrows" alt="back" />
+                        <p class="previous-text">Previous Pokemon</p>
+                    </a>
+                    <a href="#" class="next-wrapper" id="rightArrow">
+                        <p class="next-text">Next Pokemon</p>
+                        <img src="./assets/rightarrow.png" class="arrows" alt="forward" />
+                    </a>
+                </div>
+            </header>
+            <section class="detail-wrapper">
+                <div class="detail-content">
+                    <div class="name-id-wrap">
+                        <p class="pokemon-name"></p>
+                        <p class="pokemon-id"></p>
+                    </div>
+                    <div class="stats-facts-wrapper">
+                        <div class="img-and-stats">
+                            <div class="pokemon-img-wrapper">
+                                <img src="" class="pokemon-img" alt="" />
+                            </div>
+                            <div class="stats-wrapper"></div>
+                        </div>
+                        <div class="fact-wrapper">
+                            <div class="pokemon-description"></div>
+                            <div class="info-wrapper">
+                                <div class="height-weight-wrapper">
+                                    <div class="height-wrapper">
+                                        <p class="info-titles">Height</p>
+                                        <p class="pokemon-height"></p>
+                                    </div>
+                                    <div class="weight-wrapper">
+                                        <p class="info-titles">Weight</p>
+                                        <p class="pokemon-weight"></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="ability-wrapper"></div>
+                            </div>
+                            <div class="typing-wrapper">
+                                <div class="type-title">Type</div>
+                                <div class="typing-wrap"></div>
+                            </div>
+                            <div class="weakness-wrapper">
+                                <div class="weakness-title">Weakness</div>
+                                <div class="weakness-wrap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+        </main>
+    </body>
+</html>
