@@ -1,6 +1,6 @@
 Pokedex web application made using HTML, CSS & Javascript. Credits to pokeapi.co for providing data to make the pages.
 
-Used Live Server to make the pages.
+(https://liamle3.github.io/Pokedex/)
 
 ![Mainpage](https://github.com/user-attachments/assets/b41546d8-98d0-4af6-a773-454e36e1feaa)
 
