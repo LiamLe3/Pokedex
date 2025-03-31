@@ -1,0 +1,1 @@
+const MAX_POKEMON = 151; //If you change this change this  value on pokemon-detail.js

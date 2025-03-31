@@ -1,5 +1,6 @@
 const MAX_POKEMON = 151; //If you change this change this  value on pokemon-detail.js
-const listWrapper = document.querySelector(".list-wrapper");
+const listWrapper = document.querySelector(".pokemon-list");
+const listSection = document.querySelector(".list-section");
 const searchInput = document.querySelector("#search-input");
 const notFoundMessage = document.querySelector("#not-found-message");
 
