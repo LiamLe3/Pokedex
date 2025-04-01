@@ -1,5 +1,6 @@
 :root {
     --page-max-width: 1280px;
+    --list-max-width: 980px;
 }
 
 * {
@@ -30,7 +31,6 @@ html {
 .page-wrapper {
     position: relative;
     background: url("./assets/greywallpaper.png") repeat-y center top;
-    background-size: auto;
     min-width: var(--page-max-width);
     display: flex;
     flex-direction: column;
@@ -99,7 +99,7 @@ html {
 
 .list-wrapper {
     width: 100%;
-    max-width: 980px;
+    max-width: var(--list-max-width);
     background: white;
     display: flex;
     flex-direction: column;
@@ -124,20 +124,19 @@ html {
     font-size: 30px;
 }
 
-
-/* Load Button */
 .load-button {
     width: 200px;
     border: none;
     color: white;
     padding: 10px 25px;
     margin-top: 20px;
-    background: skyblue;
-    border-radius: 25px;
+    background: #87CEEB;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .load-button:hover {
-    background: darkblue;
+    background: #7cbed8;
     cursor: pointer;
 }
 
@@ -434,5 +433,23 @@ progress::-webkit-progress-bar {
 .steel {background: #B8B8D0}
 .fairy {background: #EE99AC}
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 425px) {
+    :root {
+        --page-max-width: 426px;
+        --list-max-width: 300px;
+    }
+
+    .page-wrapper {
+        background: white;
+    }
+
+    .list-wrapper {
+        justify-content: start;
+    }
+
+    .pokemon-list {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
 }
