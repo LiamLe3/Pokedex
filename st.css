@@ -12,7 +12,6 @@ body,
 html {
     height: 100%;
     width: 100%;
-    background-color: grey;
     overflow: hidden;
 }
 
@@ -60,7 +59,7 @@ html {
 
 /* Search Bar */
 .search-wrapper {
-    padding: 1rem 0;
+    padding: 10px 0;
     width: 100%;
     background: #313131;
     display: flex;
@@ -69,9 +68,8 @@ html {
 }
 
 .search-font {
-    margin: 0;
     color: white;
-    font-size: 250%;
+    font-size: 40px;
 }
 
 .search-container {
@@ -86,6 +84,7 @@ html {
 }
 
 .search-input {
+    width: 100%;
     border: none;
     outline: none;
     background: transparent;
@@ -102,6 +101,10 @@ html {
     width: 100%;
     max-width: 980px;
     background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;
     padding: 10px 20px 20px 20px;
 }
@@ -122,11 +125,25 @@ html {
 }
 
 
+/* Load Button */
+.load-button {
+    width: 200px;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    margin-top: 20px;
+    background: skyblue;
+    border-radius: 25px;
+}
 
+.load-button:hover {
+    background: darkblue;
+    cursor: pointer;
+}
 
-
+/* Pokemon Wrap */
 .pokemon-wrap {
-    padding: 0.5rem;
+    padding: 15px 15px 0 15px;
 }
 
 .img-wrap {
@@ -142,36 +159,33 @@ html {
 }
 
 .pokemon-name-font {
-    margin: 0;
     font-weight: bold;
-    font-size: 150%;
+    font-size: 25px;
     text-transform: capitalize;
 }
 
 .pokemonID-font {
-    margin: 0;
-    padding: 0.27rem 0.5rem 0;
+    padding: 5px 5px 0;
 }
 
 .type-wrap {
-    margin: auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
 }
 
 .list-type {
-    margin: auto;
-    padding-top: 5px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     height: 30px;
     width: 100px;
-    text-align: center;
-    font-size: 130%;
+    font-size: 20px;
     border-radius: 30px;
     text-transform: capitalize;
     color: white;
 }
-
 
 /* detail.html specific styling*/
 .navigation-wrapper {
@@ -419,3 +433,6 @@ progress::-webkit-progress-bar {
 .dark {background: #705848}
 .steel {background: #B8B8D0}
 .fairy {background: #EE99AC}
+
+@media only screen and (max-width: 600px) {
+}

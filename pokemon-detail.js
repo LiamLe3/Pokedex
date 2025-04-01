@@ -248,3 +248,13 @@ async function displayNextPokemonName(id, tag) {
         return false;
     }
 }
+
+    /*
+    pokemonTypeDict[id].forEach(({type}) => {
+        createAndAppendElement(typeItem, "p", {
+            className: `list-type ${type.name}`,
+            textContent: type.name,
+        })
+    });
+
+    parent.appendChild(typeItem);*/

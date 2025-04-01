@@ -1,39 +1,34 @@
 const MAX_POKEMON = 151; //If you change this change this  value on pokemon-detail.js
+const BATCH = 12;
 const listWrapper = document.querySelector(".pokemon-list");
 const listSection = document.querySelector(".list-section");
 const searchInput = document.querySelector("#search-input");
 const notFoundMessage = document.querySelector("#not-found-message");
+const loadButton = document.querySelector(".load-button");
 
 let pokemonList = [];
+let filteredList = [];
+let factor = 1;
 
 fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
     .then((response) => response.json())
     .then((data) => {
         pokemonList = data.results;
-        displayPokemons(pokemonList);
+        filteredList = pokemonList;
+        displayPokemons();
+        displayLoadButton();
     });
+
 
 notFoundMessage.style.display = "none";
 searchInput.addEventListener("keyup", handleSearch);
+loadButton.addEventListener("click", displayNextBatch);
 
-function displayPokemons(pokemon) {
-    listWrapper.innerHTML = "";
-    pokemon.forEach((pokemon) => {
-        const pokemonID = pokemon.url.split("/")[6]; //Get pokemon ID
-        const listItem = document.createElement("div");
-        listItem.className = "list-item";
-        listItem.innerHTML = `
-            <div class=pokemon-wrap>
-                <div class="img-wrap">
-                    <img src="./assets/pokeimg/${pokemonID}.png" alt="${pokemon.name}" />
-                </div>
-                <div class="name-id-wrapper">
-                    <p class="pokemon-name-font">${pokemon.name}</p>
-                    <p class="pokemonID-font">#${String(pokemonID).padStart(4, "0")}</p>
-                </div>
-            `
-        ;
+function displayPokemons() {
+    for (let index=(factor - 1)*BATCH; index < factor*BATCH; index++){
+        if(index >= filteredList.length) return;
 
+        const { pokemonID, listItem } = createPokemonElement(index);
         displayPokemonTyping(pokemonID, listItem);
 
         listItem.addEventListener("click", async () => {
@@ -44,15 +39,36 @@ function displayPokemons(pokemon) {
         });
 
         listWrapper.appendChild(listItem);
-    });
+    }
+}
+
+function createPokemonElement(index){
+    const pokemon = filteredList[index];
+    const pokemonID = pokemon.url.split("/")[6];
+    const listItem = document.createElement("div");
+    listItem.className = "list-item";
+    listItem.innerHTML = `
+        <div class=pokemon-wrap>
+        <div class="img-wrap">
+            <img src="./assets/pokeimg/${pokemonID}.png" alt="${pokemon.name}" />
+        </div>
+        <div class="name-id-wrapper">
+            <p class="pokemon-name-font">${pokemon.name}</p>
+            <p class="pokemonID-font">#${String(pokemonID).padStart(4, "0")}</p>
+        </div>
+    `;
+
+    return {
+        pokemonID,
+        listItem
+    };
+
 }
 
 async function displayPokemonTyping(id, parent) {
     try {
-        const [pokemon] = await Promise.all([
-        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-            .then((res) => res.json()),
-        ]);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const pokemon = await response.json();
 
         const typeItem = document.createElement("div");
         typeItem.className = "type-wrap";
@@ -71,17 +87,6 @@ async function displayPokemonTyping(id, parent) {
     }
 }
 
-/* Creates a tag within the given parent element. Will also add any given attributes */
-function createAndAppendElement(parent, tag, options = {}) {
-    const element = document.createElement(tag);
-    Object.keys(options).forEach((key) => {
-        element[key] = options[key];
-    });
-    parent.appendChild(element);
-    return element;
-}
-
-
 /* Used to ensure pokemon exists before redirecting to its details page */
 async function fetchPokemonData(id) {
     try {
@@ -97,28 +102,62 @@ async function fetchPokemonData(id) {
     }
 }
 
+/* Creates a tag within the given parent element. Will also add any given attributes */
+function createAndAppendElement(parent, tag, options = {}) {
+    const element = document.createElement(tag);
+    Object.keys(options).forEach((key) => {
+        element[key] = options[key];
+    });
+    parent.appendChild(element);
+    return element;
+}
+
 function handleSearch() {
+    filterList();
+    factor = 1;
+    listWrapper.innerHTML = "";
+    displayPokemons();
+
+    displayLoadButton();
+    displayNotFoundMessage();
+}
+
+function filterList() {
     const searchTerm = searchInput.value.toLowerCase();
-    let filterPokemons;
 
     if (!isNaN(Number(searchTerm))) { //Filter by number
-        filterPokemons = pokemonList.filter((pokemon) => {
+        filteredList = pokemonList.filter((pokemon) => {
             const pokemonID = pokemon.url.split("/")[6];
             return pokemonID.startsWith(searchTerm);
         });
     } else if (searchTerm != "") { //Filter by name
-        filterPokemons = pokemonList.filter((pokemon) =>
+        filteredList = pokemonList.filter((pokemon) =>
             pokemon.name.toLowerCase().startsWith(searchTerm)
         );
     } else { //No filter
-        filterPokemons = pokemonList;
+        filteredList = pokemonList;
     }
+}
 
-    displayPokemons(filterPokemons);
+function displayLoadButton() {
+    if(factor*BATCH < filteredList.length){
+        loadButton.style.display = "block";
+    }
+    else {
+        loadButton.style.display = "none";
+    }
+}
 
-    if (filterPokemons.length === 0) {
+function displayNotFoundMessage() {
+    if (filteredList.length === 0) {
         notFoundMessage.style.display = "block";
     } else {
         notFoundMessage.style.display = "none";
     }
+}
+
+function displayNextBatch(){
+    factor += 1;
+    displayPokemons();
+    displayLoadButton();
 }
