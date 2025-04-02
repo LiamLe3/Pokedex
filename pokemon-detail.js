@@ -63,7 +63,7 @@ async function loadPokemon(id) {
                 navigatePokemon(nextPokemon);
             });
 
-            displayNextPokemonName(previousPokemon, ".previous-text")
+            displayNextPokemonName(previousPokemon, ".prev-text")
             displayNextPokemonName(nextPokemon, ".next-text")
 
             window.history.pushState({}, "", `./detail.html?id=${id}`);
@@ -86,7 +86,7 @@ function displayDetails(pokemon){
     document.querySelector(".pokemon-name").textContent = capitalisePokemonName;
     document.querySelector(".pokemon-id").textContent = `#${String(id).padStart(4, "0")}`;
 
-    const imageElement = document.querySelector(".pokemon-img-wrapper img");
+    const imageElement = document.querySelector(".pokemon-img");
     imageElement.src = `./assets/pokeimg/${id}.png`;
     imageElement.alt = name;
     
@@ -248,13 +248,3 @@ async function displayNextPokemonName(id, tag) {
         return false;
     }
 }
-
-    /*
-    pokemonTypeDict[id].forEach(({type}) => {
-        createAndAppendElement(typeItem, "p", {
-            className: `list-type ${type.name}`,
-            textContent: type.name,
-        })
-    });
-
-    parent.appendChild(typeItem);*/

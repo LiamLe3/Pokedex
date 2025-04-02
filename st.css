@@ -40,6 +40,10 @@ html {
 
 /* Logo */
 .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
     width: 100%;
     background: #e2350d;
 }
@@ -186,95 +190,100 @@ html {
     color: white;
 }
 
-/* detail.html specific styling*/
+/* detail.html*/
+
+/* NAVIGATION */
 .navigation-wrapper {
     background: #313131;
+    height: 106px;
     width: 100%;
     display:flex;
-    align-items: center;
+    justify-content: center;
 }
 
-.previous-wrapper {
-    border: 2px solid white;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width:50%;
-    text-decoration: none;
-}
-
-.next-wrapper {
-    border: 2px solid white;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width:50%;
-    text-decoration: none;
-}
-
-.previous-text,
-.next-text {
-    font-size: 250%;
+.prev-pokemon,
+.next-pokemon {
     color: white;
+    display: flex;
+    align-items: center;
+    width: calc(var(--list-max-width)/2);
+    text-decoration: none;
+}
+
+.prev-pokemon {
+    justify-content: start;
+    border-right: 2px solid white;
+}
+
+.next-pokemon {
+    justify-content: end;
+    border-left: 2px solid white;
+}
+
+.bx {
+    margin: 0 10px;
+    font-size: 40px;
+}
+
+.prev-text,
+.next-text {
+    margin: 10px 10px;
+    font-size: 40px;
     text-transform: capitalize;
 }
 
-.arrows {
-    padding: 1rem;
-    width: 2rem;
-}
-
-.detail-content {
-    margin: auto;
-    background: white;
+/* TITLE */
+.pokemon-title {
+    max-width: var(--list-max-width);
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    max-width: 980px;
-    height: 100%;
+    justify-content: center;
+    background: white;
     width: 100%;
 }
 
-.name-id-wrap {
-    display: flex;
+.pokemon-name,
+.pokemon-id {
+    margin: 0;
+    padding: 10px;
+    font-size: 40px;
 }
 
 .pokemon-name {
-    margin: 0;
-    padding: 0.5rem;
-    font-size: 250%;
     font-weight: bold;
 }
 
 .pokemon-id {
-    margin: 0;
-    padding: 0.5rem;
-    font-size: 250%;
     color: #606068;
 }
 
-.stats-facts-wrapper {
+/* INFO */
+.pokemon-content {
+    background: white;
+    max-width: var(--list-max-width);
     display: flex;
+    width: 100%;
+    flex-grow: 1;
 }
 
-.img-and-stats {
-    padding-right: 1rem;
-    max-width: 490px;
+/* Left Content */
+.left-content{
+    padding: 0 20px 20px;
     width: 50%;
     display: flex;
-    align-items: flex-end;
     flex-direction: column;
+    align-items: center;
 }
 
-.fact-wrapper {
-    padding-left: 1rem;
-    max-width: 490px;
-    width: 50%;
+.pokemon-img {
+    width: 100%;
+    background: lightgray;
+    border-radius: 10px;
 }
 
+/* Stats */
 .stats-wrapper {
-    margin-top: 1rem;
-    padding: 0.5rem 0;
+    margin-top: 20px;
+    padding: 5px 0;
     width: 100%;
     border-radius: 10px;
     background: #949494;
@@ -288,16 +297,25 @@ html {
 
 .stat-name {
     margin: 0;
-    padding: .25rem;
-    width: 5rem;
-    font-size: 150%;
+    padding: 2px;
+    width: 120px;
+    font-size: 25px;
     text-align: right;
 }
 
 .stat-value {
     margin: 0;
-    padding: 0 0.5rem;
-    font-size: 150%;
+    padding: 0 10px;
+    font-size: 25px;
+}
+
+.stat-bar {
+    padding-left: 5px;
+    flex-grow: 0.8;
+}
+
+.stat-bar::-webkit-progress-value {
+    border-radius: 30px;
 }
 
 progress {
@@ -306,15 +324,6 @@ progress {
 
 progress::-webkit-progress-bar {
     background-color: transparent;
-}
-
-.stat-bar {
-    padding-left: 0.5rem;
-    flex-grow: 0.8;
-}
-
-.stat-bar::-webkit-progress-value {
-    border-radius: 30px;
 }
 
 .cat1::-webkit-progress-value{
@@ -336,70 +345,62 @@ progress::-webkit-progress-bar {
     background-color:#03c2ba;
 }
 
-.pokemon-img-wrapper {
-    background: #f2f2f2;
-    border-radius: 10px;
-    width: 100%;
-}
 
-.pokemon-img {
-    width: 100%;
+/* Right Content */
+.right-content {
+    padding: 0 20px 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .pokemon-description {
-    font-size: 150%;
-    padding: 0 1rem 1rem;
+    font-size: 25px;
+    padding: 10px;
 }
 
+/* Info */
 .info-wrapper  {
+    padding: 10px;
     background: #31a7d7;
-    padding: 1rem;
     border-radius: 10px;
     display: flex;
+    justify-content: space-around;
 }
 
 .info-titles {
-    margin: 0;
     color: white;
-    font-size: 150%;
-}
-
-.height-wrapper
-{
-    padding-bottom: 1rem;
-}
-
-.ability-wrapper {
-    margin: 0 auto;
+    font-size: 25px;
 }
 
 .pokemon-height,
 .pokemon-weight,
 .pokemon-ability {
-    margin: 0;
-    padding-top: 0.3rem;
-    font-size: 150%;
+    font-size: 25px;
     text-transform: capitalize;
 }
 
+/* Typings */
 .typing-wrapper, .weakness-wrapper {
-    padding: 1rem 1rem;
+    padding: 10px;
 }
 
 .type-title, .weakness-title {
-    font-size: 150%;
+    font-size: 25px;
     font-weight: bold;
 }
 
-.typing-wrap {
+.typing-wrap,
+.weakness-wrap {
     display: flex;
     flex-wrap: wrap;
 }
 
-.type, .weakness {
-    margin: 1rem 1rem 0 0;
-    font-size: 150%;
-    padding-top: 5px;
+.type,
+.weakness {
+    margin: 5px;
+    font-size: 25px;
     text-align: center;
     border-radius: 30px;
     text-transform: capitalize;
@@ -407,12 +408,6 @@ progress::-webkit-progress-bar {
     width: 100px;
     height: 30px;
 }
-
-.weakness-wrap {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 
 .normal {background: #A8A878}
 .fire {background: #F08030}
@@ -449,7 +444,56 @@ progress::-webkit-progress-bar {
 
     .pokemon-list {
         display: flex;
+        grid-template-columns: unset;
         flex-direction: column;
         cursor: pointer;
+    }
+
+    /* detail.js */
+    .pokemon-name,
+    .pokemon-id {
+        font-size: 30px;
+    }
+
+    .prev-pokemon,
+    .next-pokemon {
+        width: 50%;
+        justify-content: center;
+    }
+
+    .prev-pokemon {
+        flex-direction: column-reverse;
+        align-items: end;
+    }
+
+    .next-pokemon {
+        flex-direction: column;
+        align-items: start;
+    }
+    
+    .bx,
+    .prev-text,
+    .next-text {
+        font-size: 25px;
+    }
+
+    .pokemon-content {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .left-content,
+    .right-content {
+        width: 100%;
+    }
+
+    .info-wrapper {
+        flex-direction: column;
+    }
+
+    .height-wrapper,
+    .weight-wrapper,
+    .ability-wrapper {
+        margin: 5px;
     }
 }
