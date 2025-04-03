@@ -38,6 +38,7 @@ html {
     flex-grow: 1;
 }
 
+/* index.html */
 /* Logo */
 .logo-wrapper {
     display: flex;
@@ -367,6 +368,7 @@ progress::-webkit-progress-bar {
     border-radius: 10px;
     display: flex;
     justify-content: space-around;
+    text-align: center;
 }
 
 .info-titles {
@@ -438,6 +440,7 @@ progress::-webkit-progress-bar {
         background: white;
     }
 
+    /* index.html */
     .list-wrapper {
         justify-content: start;
     }
@@ -450,11 +453,8 @@ progress::-webkit-progress-bar {
     }
 
     /* detail.js */
-    .pokemon-name,
-    .pokemon-id {
-        font-size: 30px;
-    }
 
+    /* NAVIGATION */
     .prev-pokemon,
     .next-pokemon {
         width: 50%;
@@ -470,21 +470,28 @@ progress::-webkit-progress-bar {
         flex-direction: column;
         align-items: start;
     }
-    
+
     .bx,
     .prev-text,
     .next-text {
         font-size: 25px;
     }
 
-    .pokemon-content {
-        flex-direction: column;
-        flex-wrap: wrap;
+    /* POKEMON CONTENT */
+    .pokemon-name,
+    .pokemon-id {
+        font-size: 30px;
     }
 
     .left-content,
     .right-content {
         width: 100%;
+    }
+
+    /* RIGHT CONTENT */
+    .pokemon-content {
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 
     .info-wrapper {
@@ -495,5 +502,15 @@ progress::-webkit-progress-bar {
     .weight-wrapper,
     .ability-wrapper {
         margin: 5px;
+    }
+
+    .type-title,
+    .weakness-title {
+        text-align: center;
+    }
+
+    .typing-wrap,
+    .weakness-wrap {
+        justify-content: center;
     }
 }

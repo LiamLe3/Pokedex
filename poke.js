@@ -1,10 +1,13 @@
-const MAX_POKEMON = 151; //If you change this change this  value on pokemon-detail.js
-const BATCH = 12;
-const listWrapper = document.querySelector(".pokemon-list");
-const listSection = document.querySelector(".list-section");
+import { MAX_POKEMON, BATCH } from "./constants.js";
+
 const searchInput = document.querySelector("#search-input");
+const listWrapper = document.querySelector(".pokemon-list");
 const notFoundMessage = document.querySelector("#not-found-message");
 const loadButton = document.querySelector(".load-button");
+notFoundMessage.style.display = "none";
+
+searchInput.addEventListener("keyup", handleSearch);
+loadButton.addEventListener("click", displayNextBatch);
 
 let pokemonList = [];
 let filteredList = [];
@@ -19,17 +22,12 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
         displayLoadButton();
     });
 
-
-notFoundMessage.style.display = "none";
-searchInput.addEventListener("keyup", handleSearch);
-loadButton.addEventListener("click", displayNextBatch);
-
 function displayPokemons() {
     for (let index=(factor - 1)*BATCH; index < factor*BATCH; index++){
         if(index >= filteredList.length) return;
 
         const { pokemonID, listItem } = createPokemonElement(index);
-        displayPokemonTyping(pokemonID, listItem);
+        displayTyping(pokemonID, listItem);
 
         listItem.addEventListener("click", async () => {
             const success = await fetchPokemonData(pokemonID);
@@ -65,7 +63,7 @@ function createPokemonElement(index){
 
 }
 
-async function displayPokemonTyping(id, parent) {
+async function displayTyping(id, parent) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const pokemon = await response.json();
@@ -112,6 +110,9 @@ function createAndAppendElement(parent, tag, options = {}) {
     return element;
 }
 
+
+/* SEARCH */
+
 function handleSearch() {
     filterList();
     factor = 1;
@@ -139,20 +140,22 @@ function filterList() {
     }
 }
 
+function displayNotFoundMessage() {
+    if (filteredList.length === 0) {
+        notFoundMessage.style.display = "block";
+    } else {
+        notFoundMessage.style.display = "none";
+    }
+}
+
+/* LOAD */
+
 function displayLoadButton() {
     if(factor*BATCH < filteredList.length){
         loadButton.style.display = "block";
     }
     else {
         loadButton.style.display = "none";
-    }
-}
-
-function displayNotFoundMessage() {
-    if (filteredList.length === 0) {
-        notFoundMessage.style.display = "block";
-    } else {
-        notFoundMessage.style.display = "none";
     }
 }
 
