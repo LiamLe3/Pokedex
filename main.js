@@ -72,10 +72,11 @@ async function displayTyping(id, parent) {
         typeItem.className = "type-wrap";
 
         pokemon.types.forEach(({type}) => {
-            createAndAppendElement(typeItem, "p", {
-                className: `list-type ${type.name}`,
-                textContent: type.name,
-            })
+            const typing = document.createElement("p");
+            typing.className = `list-type ${type.name}`;
+            typing.textContent = type.name;
+    
+            typeItem.append(typing);
         });
 
         parent.appendChild(typeItem);
@@ -149,8 +150,7 @@ function displayNotFoundMessage() {
 }
 
 /* LOAD */
-
-function displayLoadButton() {
+function displayLoadButton(loadButton) {
     if(factor*BATCH < filteredList.length){
         loadButton.style.display = "block";
     }
