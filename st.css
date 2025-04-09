@@ -128,6 +128,7 @@ html {
 .not-found-message {
     text-align: center;
     font-size: 30px;
+    display: none;
 }
 
 .load-button {
