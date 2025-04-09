@@ -1,5 +1,4 @@
 import { BATCH } from "../constants.js";
-import { fetchPokemonData } from "./api.js";
 
 export function showLoadButton(loadButton, multiplier, listLength) {
     loadButton.style.display = multiplier * BATCH < listLength ? "block" : "none";
@@ -17,11 +16,8 @@ export function updateListUI(listWrapper, visiblePokemon, multiplier) {
         const { pokemonID, listItem } = createPokemonElement(pokemon);
         displayTyping(pokemonID, listItem);
 
-        listItem.addEventListener("click", async () => {
-            const success = await fetchPokemonData(pokemonID);
-            if (success) {
-                window.location.href = `./detail.html?id=${pokemonID}`;
-            }
+        listItem.addEventListener("click", () => {
+            window.location.href = `./detail.html?id=${pokemonID}`;
         });
 
         listWrapper.appendChild(listItem);
@@ -49,11 +45,11 @@ export function createPokemonElement(pokemon){
     };
 }
 
-export async function displayTyping(id, parent) {
+export async function displayTyping(id, listItem) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const pokemon = await response.json();
-
+        
         const typeItem = document.createElement("div");
         typeItem.className = "type-wrap";
 
@@ -65,7 +61,7 @@ export async function displayTyping(id, parent) {
             typeItem.append(typing);
         });
 
-        parent.appendChild(typeItem);
+        listItem.appendChild(typeItem);
         return true;
     } catch (error) {
         console.error("Failed to fetch Pokemon data before redirect");

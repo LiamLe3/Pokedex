@@ -1,6 +1,6 @@
-import { fetchList } from './api.js';
 import { PageData } from './pageData.js';
 import { showLoadButton, showNotFoundMessage, updateListUI } from './domUtils.js';
+import { MAX_POKEMON } from '../constants.js';
 
 setup();
 
@@ -38,4 +38,14 @@ export function handleSearch(selectors, pageData) {
     updateListUI(selectors.listWrapper, pageData.visiblePokemon, pageData.multiplier);
     showLoadButton(selectors.loadButton, pageData.multiplier, pageData.visiblePokemon.length);
     showNotFoundMessage(selectors.notFoundMessage, pageData.visiblePokemon.length);
+}
+
+export async function fetchList(limit = MAX_POKEMON) {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error("Failed to fetch Pokemon list:", error);
+    }
 }
