@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { displayTypes, displayWeakness, getWeaknesses } from "./types.js";
+import { displayTypes, displayWeakness, getWeaknesses } from "./types";
 
 describe('displayTypes()', () => {
     let typingWrap;

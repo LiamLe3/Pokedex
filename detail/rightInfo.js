@@ -7,18 +7,17 @@ export function displayFlavorText(species, description) {
             description.textContent = flavor;
         }
     }
-    return "";
 }
 
 export function displayInfo(height, weight, abilities, dom) {
-    const { heightText, weightText, abilitiesWrapper } = dom.right;
+    const { heightText, weightText, abilityWrapper } = dom.right;
 
     heightText.textContent = `${height / 10}m`;
     weightText.textContent = `${weight / 10}kg`;
 
-    abilitiesWrapper.innerHTML = `<p class="info-titles">Ability</p>`;
+    abilityWrapper.innerHTML = `<p class="info-titles">Ability</p>`;
     abilities.forEach(({ability}) => {
-        makeNewElement(abilitiesWrapper, "p", {
+        makeNewElement(abilityWrapper, "p", {
             className: "pokemon-ability",
             textContent: ability.name,
         });

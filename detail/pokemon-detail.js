@@ -23,7 +23,7 @@ function openDetailsPage() {
             descriptionText: document.querySelector(".pokemon-description"),
             heightText: document.querySelector(".pokemon-height"),
             weightText: document.querySelector(".pokemon-weight"),
-            abilitiesWrapper: document.querySelector(".ability-wrapper"),
+            abilityWrapper: document.querySelector(".ability-wrapper"),
             typingWrap: document.querySelector(".typing-wrap"),
             weaknessWrap: document.querySelector(".weakness-wrap"),
         }
