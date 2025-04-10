@@ -1,18 +1,18 @@
 import { makeNewElement } from "./helper.js";
 import { TYPE_CHART } from "../constants.js";
 
-export function displayTypes(types, typeWrapper) {
-    typeWrapper.innerHTML = "";
+export function displayTypes(types, typingWrap) {
+    typingWrap.innerHTML = "";
     types.forEach(({type}) => {
-        makeNewElement(typeWrapper, "p", {
+        makeNewElement(typingWrap, "p", {
             className: `type ${type.name}`,
             textContent: type.name,
         })
     });
 }
 
-export function displayWeakness(types, weaknessWrapper) {
-    weaknessWrapper.innerHTML = "";
+export function displayWeakness(types, weaknessWrap) {
+    weaknessWrap.innerHTML = "";
     let weaknesses = [];
 
     if(types.length == 1) {
@@ -22,7 +22,7 @@ export function displayWeakness(types, weaknessWrapper) {
     }
     
     weaknesses.forEach((weakness) => {
-        makeNewElement(weaknessWrapper, "p", {
+        makeNewElement(weaknessWrap, "p", {
             className: `weakness ${weakness}`,
             textContent: weakness,
         })

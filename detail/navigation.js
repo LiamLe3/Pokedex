@@ -88,6 +88,6 @@ function displayPage(pokemon, species, dom){
 
     displayFlavorText(species, dom.right.descriptionText);
     displayInfo(height, weight, abilities, dom);
-    displayTypes(types, dom.right.typeWrapper);
-    displayWeakness(types, dom.right.weaknessWrapper);
+    displayTypes(types, dom.right.typingWrap);
+    displayWeakness(types, dom.right.weaknessWrap);
 }

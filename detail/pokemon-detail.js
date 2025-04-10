@@ -24,8 +24,8 @@ function openDetailsPage() {
             heightText: document.querySelector(".pokemon-height"),
             weightText: document.querySelector(".pokemon-weight"),
             abilitiesWrapper: document.querySelector(".ability-wrapper"),
-            typeWrapper: document.querySelector(".typing-wrap"),
-            weaknessWrapper: document.querySelector(".weakness-wrap"),
+            typingWrap: document.querySelector(".typing-wrap"),
+            weaknessWrap: document.querySelector(".weakness-wrap"),
         }
     };
 

@@ -85,9 +85,7 @@ describe('updateListUI', () => {
         delete window.location;
         window.location = { href: '' };
     
-        let visiblePokemon = [
-            { name: 'Pidgey', url: 'https://pokeapi.co/api/v2/pokemon/16/' }
-        ];
+        let visiblePokemon = [pidgeyObj];
     
         updateListUI(listWrapper, visiblePokemon, 1);
         const listItem = listWrapper.querySelector('.list-item');
@@ -99,7 +97,6 @@ describe('updateListUI', () => {
     });
 
     afterEach(() => {
-        listWrapper.innerHTML = "";
         jest.clearAllMocks();
     })
 });
@@ -122,15 +119,28 @@ describe('displayTyping', () => {
 
     beforeEach(() => {
         listItem = document.createElement('div');
+    });
 
+    it('should display the correct one Pokemon types', async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            json: jest.fn().mockResolvedValue({
+                types: [{ type: {name: 'bug' } }]
+            })
+        });
+
+        await displayTyping(10, listItem);
+        const typeWrap = listItem.querySelector('.type-wrap');
+        expect(typeWrap.querySelectorAll('.list-type').length).toBe(1);
+        expect(typeWrap.querySelector('.list-type.bug')).toBeTruthy();
+    })
+
+    it('should display the correct two Pokemon types', async () => {
         global.fetch = jest.fn().mockResolvedValue({
             json: jest.fn().mockResolvedValue({
                 types: [{ type: {name: 'normal' } }, { type: { name: 'flying' } }]
             })
         });
-    });
-
-    it('should display the correct Pokemon types', async () => {
+        
         await displayTyping(14, listItem);
         const typeWrap = listItem.querySelector('.type-wrap');
         expect(typeWrap.querySelectorAll('.list-type').length).toBe(2);
