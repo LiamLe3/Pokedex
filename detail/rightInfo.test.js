@@ -76,7 +76,5 @@ describe('displayInfo', () => {
         expect(abilityList.length).toBe(2);
         expect(abilityList[0].textContent).toBe("Overgrow");
         expect(abilityList[1].textContent).toBe("Chlorophyll");
-
-        
     });
 });

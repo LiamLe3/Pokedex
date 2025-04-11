@@ -10,10 +10,13 @@ describe('updateURL()', () => {
     it('should update the window location pathname and search', () => {
         updateURL(42);
 
+        // Check is simulated browser has updated URL correctly
         expect(window.location.pathname).toBe('/detail.html');
         expect(window.location.search).toBe('?id=42');
     });
 
+
+    // Reset the URL
     afterEach(() => {
         window.history.pushState({}, "", "/");
     });

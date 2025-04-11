@@ -2,7 +2,10 @@ import { navigatePage, navigationSetup } from "./navigation.js";
 
 openDetailsPage();
 
+// Called when this page is first visited. Finds the correct pokemon and display it's detail
 function openDetailsPage() {
+
+    // create a object to hold all domSelectors
     const dom = {
         nav: {
             prevText: document.querySelector(".prev-text"),
@@ -29,6 +32,7 @@ function openDetailsPage() {
         }
     };
 
+    // Upon being called get the ID of the pokemon from the URL and create the pokemon's detail page
     document.addEventListener("DOMContentLoaded", () => {
         const pokemonID = new URLSearchParams(window.location.search).get("id");
         let id = parseInt(pokemonID, 10);

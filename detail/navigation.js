@@ -4,6 +4,7 @@ import { displayImg, displayStats } from './leftContent.js';
 import { displayFlavorText, displayInfo } from "./rightInfo.js";
 import { displayTypes, displayWeakness } from "./types.js";
 
+// Sets up the event listeners for the navigation to the previous and next pokemon
 export function navigationSetup(currentId, dom) {
     const { leftArrow, rightArrow } = dom.nav;
     leftArrow.addEventListener("click", () => {
@@ -17,15 +18,18 @@ export function navigationSetup(currentId, dom) {
     });
 }
 
+// Gets the previous pokemon ID, wraps to last pokemon is the current pokemon is the first pokemon
 export function getPrevId(currentId) {
     return (currentId - 1) <= 0 ? MAX_POKEMON : currentId - 1;
 }
 
+// Gets the next pokemon ID, wraps to first pokemon is the current pokemon is the last pokemon
 export function getNextId(currentId) {
     return (currentId + 1) > MAX_POKEMON ? 1 : currentId + 1;
 }
 
-async function navigatePage(id, dom) {
+// navigates to the prev/next pokemon by updating the navigation bar and page
+export async function navigatePage(id, dom) {
     const {pokemon, species} = await fetchPokemonData(id);
 
     displayNavigation(getPrevId(id), getNextId(id), dom);
@@ -33,10 +37,12 @@ async function navigatePage(id, dom) {
     updateURL(id);
 }
 
+// Same page redirect but with a new url (updated id)
 export function updateURL(id) {
     window.history.pushState({}, "", `./detail.html?id=${id}`);
 }
 
+// fetches for the pokemon's details
 async function fetchPokemonData(id) {
     try {
         const [pokemon, species] = await Promise.all([
@@ -53,6 +59,7 @@ async function fetchPokemonData(id) {
     }
 }
 
+// When called updates the prev/next pokemon name in the navigation
 export async function displayNavigation(prevID, nextID, dom){
     const { prevText, nextText } = dom.nav;    
 
@@ -63,6 +70,7 @@ export async function displayNavigation(prevID, nextID, dom){
             });
 }
 
+// fetches for the prev/next pokemon
 async function displayAdjacentPokemonName(prev, next) {
     try {
         const [prevPokemon, nextPokemon] = await Promise.all([
@@ -82,6 +90,7 @@ async function displayAdjacentPokemonName(prev, next) {
     }
 }
 
+// Displays the pokemon's page, which includes the title, image, stats, and details
 function displayPage(pokemon, species, dom){
     const {name, id, types, weight, height, abilities, stats} = pokemon;
 
