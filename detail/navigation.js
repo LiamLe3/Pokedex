@@ -25,15 +25,19 @@ export function getNextId(currentId) {
     return (currentId + 1) > MAX_POKEMON ? 1 : currentId + 1;
 }
 
-export async function navigatePage(id, dom) {
+async function navigatePage(id, dom) {
     const {pokemon, species} = await fetchPokemonData(id);
 
     displayNavigation(getPrevId(id), getNextId(id), dom);
     displayPage(pokemon, species, dom);
+    updateURL(id);
+}
+
+export function updateURL(id) {
     window.history.pushState({}, "", `./detail.html?id=${id}`);
 }
 
-export async function fetchPokemonData(id) {
+async function fetchPokemonData(id) {
     try {
         const [pokemon, species] = await Promise.all([
             fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -49,17 +53,17 @@ export async function fetchPokemonData(id) {
     }
 }
 
-export function displayNavigation(prevID, nextID, dom){
+export async function displayNavigation(prevID, nextID, dom){
     const { prevText, nextText } = dom.nav;    
 
-    displayAdjacentPokemonName(prevID, nextID)
-        .then(({prevPokemon, nextPokemon}) => {
-            prevText.textContent = prevPokemon.name;
-            nextText.textContent = nextPokemon.name;
-    })
+    await displayAdjacentPokemonName(prevID, nextID)
+            .then(({prevPokemon, nextPokemon}) => {
+                prevText.textContent = prevPokemon.name;
+                nextText.textContent = nextPokemon.name;
+            });
 }
 
-export async function displayAdjacentPokemonName(prev, next) {
+async function displayAdjacentPokemonName(prev, next) {
     try {
         const [prevPokemon, nextPokemon] = await Promise.all([
             fetch(`https://pokeapi.co/api/v2/pokemon/${prev}`)

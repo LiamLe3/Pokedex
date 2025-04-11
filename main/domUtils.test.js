@@ -58,7 +58,7 @@ describe('updateListUI', () => {
         listWrapper = document.createElement('div');
 
         global.fetch = jest.fn().mockResolvedValue({
-            json: jest.fn().mockResolvedValue({
+            json: () => ({
                 types: [{ type: {name: 'normal' } }, { type: { name: 'flying' } }]
             })
         });
@@ -123,7 +123,7 @@ describe('displayTyping', () => {
 
     it('should display the correct one Pokemon types', async () => {
         global.fetch = jest.fn().mockResolvedValue({
-            json: jest.fn().mockResolvedValue({
+            json: () => ({
                 types: [{ type: {name: 'bug' } }]
             })
         });
@@ -136,7 +136,7 @@ describe('displayTyping', () => {
 
     it('should display the correct two Pokemon types', async () => {
         global.fetch = jest.fn().mockResolvedValue({
-            json: jest.fn().mockResolvedValue({
+            json: () => ({
                 types: [{ type: {name: 'normal' } }, { type: { name: 'flying' } }]
             })
         });
