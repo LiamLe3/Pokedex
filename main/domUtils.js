@@ -1,21 +1,27 @@
 import { BATCH } from "../constants.js";
 
+// toggles between displaying the load button
 export function showLoadButton(loadButton, multiplier, listLength) {
     loadButton.style.display = multiplier * BATCH < listLength ? "block" : "none";
 }
 
+// toggles between displaying the not found messsage
 export function showNotFoundMessage(notFoundMessage, listLength) {
     notFoundMessage.style.display = listLength === 0 ? "block" : "none";
 }
 
+// Creates each pokemon item to show and when clicked navigates to their detail page
 export function updateListUI(listWrapper, visiblePokemon, multiplier) {
     for (let index = (multiplier - 1)*BATCH; index < multiplier*BATCH; index++){
-        if(index >= visiblePokemon.length) return;
+        // return early if there's no pokemons to show
+        if(index >= visiblePokemon.length) return; 
 
         const pokemon = visiblePokemon[index];
         const { pokemonID, listItem } = createPokemonElement(pokemon);
+
         displayTyping(pokemonID, listItem);
 
+        // Navigates to clicked pokemons detail page
         listItem.addEventListener("click", () => {
             window.location.href = `./detail.html?id=${pokemonID}`;
         });
@@ -24,6 +30,7 @@ export function updateListUI(listWrapper, visiblePokemon, multiplier) {
     }
 }
 
+// Creates the pokemon element
 export function createPokemonElement(pokemon){
     const pokemonID = pokemon.url.split("/")[6];
     const listItem = document.createElement("div");
@@ -45,6 +52,7 @@ export function createPokemonElement(pokemon){
     };
 }
 
+// Displays the pokemon's typing in the pokemon item
 export async function displayTyping(id, listItem) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -53,6 +61,7 @@ export async function displayTyping(id, listItem) {
         const typeItem = document.createElement("div");
         typeItem.className = "type-wrap";
 
+        // Creates one/two type element and then appends to pokemon item
         pokemon.types.forEach(({type}) => {
             const typing = document.createElement("p");
             typing.className = `list-type ${type.name}`;

@@ -4,6 +4,7 @@ import { MAX_POKEMON } from '../constants.js';
 
 setup();
 
+// Finds the the DOMSelectors, attach event listeners, and setup the page (fetching pokemons and listing them)
 export function setup() {
     const pageData = new PageData();
 
@@ -23,12 +24,14 @@ export function setup() {
     });
 }
 
+// Called whenever loadbutton is pressed. Displays up to the next 12 pokemons if any
 export function displayNextBatch(selectors, pageData){
     pageData.incrementMultiplier();
     updateListUI(selectors.listWrapper, pageData.visiblePokemon, pageData.multiplier);
     showLoadButton(selectors.loadButton, pageData.multiplier, pageData.visiblePokemon.length);
 }
 
+// Whenever the search detects a change in input, display the new list of pokemons
 export function handleSearch(selectors, pageData) {
     const searchTerm = selectors.searchInput.value.toLowerCase();
     pageData.filterList(searchTerm);
@@ -40,6 +43,7 @@ export function handleSearch(selectors, pageData) {
     showNotFoundMessage(selectors.notFoundMessage, pageData.visiblePokemon.length);
 }
 
+// Fetches all pokemons up to a given limit
 export async function fetchList(limit = MAX_POKEMON) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`);

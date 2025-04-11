@@ -81,6 +81,8 @@ describe('updateListUI', () => {
     
     
     it('should set the correct URL when a Pokemon item is clicked', async () => {
+
+        //mock window.location to allow tracking of href
         const originalLocation = window.location;
         delete window.location;
         window.location = { href: '' };
@@ -89,10 +91,12 @@ describe('updateListUI', () => {
     
         updateListUI(listWrapper, visiblePokemon, 1);
         const listItem = listWrapper.querySelector('.list-item');
+
         listItem.click();
     
         expect(window.location.href).toBe('./detail.html?id=16');
-    
+        
+        // Restore window
         window.location = originalLocation;
     });
 
@@ -121,7 +125,7 @@ describe('displayTyping', () => {
         listItem = document.createElement('div');
     });
 
-    it('should display the correct one Pokemon types', async () => {
+    it('should display the correct one Pokemon type', async () => {
         global.fetch = jest.fn().mockResolvedValue({
             json: () => ({
                 types: [{ type: {name: 'bug' } }]
