@@ -1,7 +1,8 @@
 export const MAX_POKEMON = 151; //Change this to increase/decrease number of total pokemons
 
-export const BATCH = 12;
+export const BATCH = 12; // Shows 12 pokemons at a time whenever you load more pokemons
 
+// Stat names for details page
 export const STATS_NAME = {
     hp: "HP",
     attack: "Atk",
@@ -11,6 +12,7 @@ export const STATS_NAME = {
     speed: "Spd",
 };
 
+// Typing chart to determine weaknesses of pokemon
 export const TYPE_CHART = {
     "normal" : {
         weakTo: ["fighting"], 
