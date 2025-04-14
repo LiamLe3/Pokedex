@@ -11,6 +11,7 @@ export function displayImg(name, id, pokemonImg) {
 export function displayStats(stats, statsWrapper) {
     statsWrapper.innerHTML = "";
 
+    // For each stat type
     stats.forEach(({ stat, base_stat }) => {
         const statDiv = document.createElement("div");
         statDiv.className = "stats-wrap";
