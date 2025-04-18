@@ -12,6 +12,7 @@ export function showNotFoundMessage(notFoundMessage, listLength) {
 
 // Creates each pokemon item to show and when clicked navigates to their detail page
 export function updateListUI(listWrapper, visiblePokemon, multiplier) {
+    // For each pokemon item in current batch
     for (let index = (multiplier - 1)*BATCH; index < multiplier*BATCH; index++){
         // return early if there's no pokemons to show
         if(index >= visiblePokemon.length) return; 
