@@ -27,6 +27,7 @@ html {
     align-items: center;
     overflow-y: auto;
     overflow-x: hidden;
+    font-family: Arial;
 }
 
 .page-wrapper {
